@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'" />
+  <title>Media AutoPilot - イチゴナビ（求人）自動化</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="tabs">
+    <button class="tab active" data-tab="pipeline">パイプライン</button>
+    <button class="tab" data-tab="settings">設定</button>
+    <button class="tab" data-tab="logs">ログ</button>
+  </nav>
+
+  <!-- ============ パイプライン ============ -->
+  <main id="tab-pipeline" class="page active">
+    <section class="cards">
+      <div class="card"><div class="card-value" id="card-mode">dry-run</div><div class="card-label">モード</div></div>
+      <div class="card"><div class="card-value" id="card-sent">0 / 30</div><div class="card-label">本日スカウト送信</div></div>
+      <div class="card"><div class="card-value" id="card-rate">0%</div><div class="card-label">面接 設定→来店</div></div>
+      <div class="card"><div class="card-value" id="card-bump">ON / 30分</div><div class="card-label">定期更新(bump)</div></div>
+    </section>
+
+    <section class="toolbar">
+      <button id="btn-launch-login" class="btn primary">ブラウザ起動ログイン</button>
+      <button id="btn-finish-login" class="btn">ログイン完了</button>
+      <span id="login-status" class="muted"></span>
+    </section>
+
+    <h2>スカウト ・ 生成 → 内容確認 → 選んで送信</h2>
+    <div class="table-wrap">
+      <table id="drafts-table">
+        <thead>
+          <tr><th class="col-check"></th><th>ID</th><th>会員</th><th class="col-wide">件名</th><th>状態</th><th>作成</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <section class="toolbar">
+      <button id="btn-generate" class="btn">下書きを生成</button>
+      <button id="btn-send" class="btn primary">選択を送信（確認）</button>
+      <button id="btn-delete" class="btn">削除</button>
+    </section>
+
+    <h2>面接 ・ 設定→来店の歩留まりを追う</h2>
+    <p class="muted" id="interview-stats">設定済 0 / リマインド 0 / 来店 0 / 飛び 0 / 採用 0 — 設定→来店 歩留まり 0%（母数 0）</p>
+    <section class="toolbar form-row">
+      <input id="iv-member" type="text" placeholder="会員名/呼称" />
+      <input id="iv-datetime" type="datetime-local" />
+      <input id="iv-source" type="text" value="scout" class="short" />
+      <input id="iv-note" type="text" placeholder="メモ(任意)" />
+      <button id="btn-add-interview" class="btn primary">面接を登録</button>
+    </section>
+    <div class="table-wrap">
+      <table id="interviews-table">
+        <thead>
+          <tr><th class="col-check"></th><th>ID</th><th class="col-wide">会員</th><th>流入</th><th>ステージ</th><th>面接日時</th><th>来店/飛び時刻</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <section class="toolbar">
+      <button class="btn stage-btn" data-stage="reminded">リマインド済</button>
+      <button class="btn stage-btn" data-stage="visited">来店</button>
+      <button class="btn stage-btn" data-stage="noshow">飛び</button>
+      <button class="btn stage-btn" data-stage="hired">採用</button>
+    </section>
+  </main>
+
+  <!-- ============ 設定 ============ -->
+  <main id="tab-settings" class="page">
+    <h2>ログイン</h2>
+    <div class="settings-grid">
+      <label>ログインURL</label><input id="set-loginUrl" type="text" />
+      <label>ログインID</label><input id="set-loginId" type="text" />
+      <label>パスワード</label><input id="set-loginPassword" type="password" />
+    </div>
+    <h2>スカウト</h2>
+    <div class="settings-grid">
+      <label>dry-runモード</label><input id="set-dryRun" type="checkbox" />
+      <label>1日の送信上限</label><input id="set-dailyCap" type="number" min="1" />
+      <label>リストURL</label><input id="set-listUrl" type="text" />
+      <label>巡回ページ数</label><input id="set-maxPages" type="number" min="1" />
+      <label>件名テンプレ</label><input id="set-subjectTemplate" type="text" />
+      <label>本文テンプレ<br /><span class="muted">{name}=会員名</span></label>
+      <textarea id="set-bodyTemplate" rows="10"></textarea>
+    </div>
+    <h2>定期更新(bump)</h2>
+    <div class="settings-grid">
+      <label>有効</label><input id="set-bumpEnabled" type="checkbox" />
+      <label>間隔（分）</label><input id="set-bumpIntervalMin" type="number" min="1" />
+      <label>更新ページURL</label><input id="set-bumpUrl" type="text" />
+      <label>更新ボタンのセレクタ</label><input id="set-bumpSelector" type="text" />
+    </div>
+    <section class="toolbar">
+      <button id="btn-save-settings" class="btn primary">設定を保存</button>
+      <span id="settings-status" class="muted"></span>
+    </section>
+  </main>
+
+  <!-- ============ ログ ============ -->
+  <main id="tab-logs" class="page">
+    <h2>ログ</h2>
+    <pre id="log-view"></pre>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
