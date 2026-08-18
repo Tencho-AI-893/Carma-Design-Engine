@@ -41,6 +41,7 @@
 | 09 | [kpi.md](./09_kpi.md) | ブランド資産を測る指標設計 | 四半期ごと |
 | 10 | [roadmap-10years.md](./10_roadmap-10years.md) | 10年ロードマップとフェーズ移行条件 | 年1回 |
 | 11 | [dialectic.md](./11_dialectic.md) | 弁証法によるOS自己検証と最適解 | 年1回 |
+| — | [content/](./content/) | 実際のコンテンツ原稿 | 随時 |
 | — | [templates/](./templates/) | 月次レポート・判断ログ・失敗ログ等の雛形 | 随時 |
 
 ---
