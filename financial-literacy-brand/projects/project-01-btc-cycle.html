@@ -1,0 +1,463 @@
+<title>BTCサイクル積立プロジェクト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --ground:#F2F4F3; --paper:#FFFFFF;
+  --ink:#16232E; --ink-2:#4E5F6B; --ink-3:#7C8B94;
+  --rule:#D3DAD8; --rule-soft:#E4E9E7;
+  --ai:#1D3E63; --ai-soft:#E5EBF2;
+  --shu:#C2402A; --shu-soft:#F6E6E2;
+  --grid:rgba(29,62,99,.045);
+  --shadow:0 1px 2px rgba(22,35,46,.05), 0 8px 24px -16px rgba(22,35,46,.22);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#10181F; --paper:#16212B;
+    --ink:#E7EDEA; --ink-2:#A2B1BA; --ink-3:#75858F;
+    --rule:#2A3841; --rule-soft:#212D36;
+    --ai:#8AB2DC; --ai-soft:#1B2A38;
+    --shu:#E8705A; --shu-soft:#2C1D1A;
+    --grid:rgba(138,178,220,.05);
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#10181F; --paper:#16212B;
+  --ink:#E7EDEA; --ink-2:#A2B1BA; --ink-3:#75858F;
+  --rule:#2A3841; --rule-soft:#212D36;
+  --ai:#8AB2DC; --ai-soft:#1B2A38;
+  --shu:#E8705A; --shu-soft:#2C1D1A;
+  --grid:rgba(138,178,220,.05);
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background-color:var(--ground);
+  background-image:
+    repeating-linear-gradient(to right, var(--grid) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(to bottom, var(--grid) 0 1px, transparent 1px 26px);
+  color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Shippori Mincho","Hiragino Mincho ProN",serif;font-weight:700;margin:0;line-height:1.5;text-wrap:balance}
+p{margin:0}
+a{color:var(--ai)}
+:focus-visible{outline:2px solid var(--ai);outline-offset:3px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+/* ---------- masthead ---------- */
+.mast{padding:56px 0 34px;border-bottom:2px solid var(--ai)}
+.kicker{
+  display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10.5px;
+  letter-spacing:.18em;color:var(--ai);border:1px solid var(--ai);padding:5px 11px;margin-bottom:22px;
+}
+.mast h1{font-size:clamp(28px,5.4vw,44px);letter-spacing:.02em}
+.mast .sub{margin-top:14px;color:var(--ink-2);font-size:15px;max-width:38em}
+.stamps{
+  display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:24px;
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-3);letter-spacing:.06em;
+}
+.stamps b{color:var(--ink-2);font-weight:500}
+
+/* ---------- alert ---------- */
+.alert{
+  margin-top:26px;background:var(--paper);border:1px solid var(--shu);
+  padding:20px 22px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+  box-shadow:var(--shadow);
+}
+.alert .badge{
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;
+  background:var(--shu);color:var(--ground);padding:5px 10px;white-space:nowrap;
+}
+.alert h2{font-size:17px;margin-bottom:7px;color:var(--shu)}
+.alert p{font-size:14px;color:var(--ink-2);line-height:1.85}
+.alert .count{font-family:"JetBrains Mono",monospace;font-size:15px;color:var(--shu);font-weight:500}
+@media(max-width:560px){.alert{grid-template-columns:1fr;gap:12px}.alert .badge{justify-self:start}}
+
+/* ---------- doc layout ---------- */
+.doc{display:grid;grid-template-columns:210px minmax(0,1fr);gap:0;padding:52px 0 0}
+.toc{position:sticky;top:24px;align-self:start;padding-right:30px}
+.toc .t{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.16em;color:var(--ink-3);margin-bottom:14px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:t}
+.toc a{
+  display:block;text-decoration:none;color:var(--ink-2);font-size:13px;padding:5px 0 5px 26px;
+  position:relative;line-height:1.6;border-left:1px solid transparent;
+}
+.toc li{counter-increment:t}
+.toc a::before{
+  content:counter(t,decimal-leading-zero);position:absolute;left:0;top:5px;
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-3);
+}
+.toc a:hover{color:var(--ai)}
+.body{border-left:1px solid var(--rule);padding-left:46px;max-width:44em;min-width:0}
+@media(max-width:860px){
+  .doc{grid-template-columns:1fr;padding-top:34px}
+  .toc{position:static;padding-right:0;margin-bottom:32px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+  .toc ol{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));display:grid}
+  .body{border-left:0;padding-left:0}
+}
+
+/* ---------- sections ---------- */
+section{padding-bottom:52px}
+section h2{
+  font-size:clamp(20px,3.4vw,26px);margin-bottom:18px;padding-bottom:12px;
+  border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline;
+}
+section h2 .n{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ai);letter-spacing:.1em;font-weight:500}
+h3{font-size:16px;margin:30px 0 12px;color:var(--ai)}
+.t{color:var(--ink-2);font-size:15px}
+.t+.t{margin-top:14px}
+.t strong{color:var(--ink);font-weight:700}
+.lead-q{
+  font-family:"Shippori Mincho",serif;font-weight:700;font-size:clamp(17px,3vw,21px);
+  line-height:1.65;border-left:3px solid var(--ai);padding-left:20px;margin-bottom:20px;
+}
+ul.plain{margin:16px 0 0;padding-left:1.2em;color:var(--ink-2);font-size:15px;display:grid;gap:8px}
+
+/* ---------- callout ---------- */
+.call{
+  background:var(--ai-soft);border-left:2px solid var(--ai);padding:16px 20px;margin-top:22px;
+  font-size:14.5px;line-height:1.85;
+}
+.call.warn{background:var(--shu-soft);border-left-color:var(--shu)}
+.call.warn strong{color:var(--shu)}
+.call b{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--ink-3);margin-bottom:8px}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin-top:20px;border:1px solid var(--rule);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:420px;font-size:14px}
+th,td{padding:12px 16px;border:1px solid var(--rule-soft);text-align:left;vertical-align:top;line-height:1.75}
+thead th{font-size:11.5px;letter-spacing:.08em;color:var(--ink-3);font-weight:500;background:var(--ai-soft)}
+td.k{width:42%;color:var(--ink-2)}
+td strong{font-weight:700}
+tbody tr.hot td{background:var(--ai-soft)}
+.num td:last-child{text-align:right;font-family:"JetBrains Mono",monospace}
+
+/* ---------- blanks ---------- */
+.blank{
+  font-family:"JetBrains Mono",monospace;color:var(--shu);
+  border-bottom:1px dashed var(--shu);padding:0 4px;white-space:nowrap;
+}
+
+/* ---------- form sheet (hypothesis) ---------- */
+.sheet{border:1px solid var(--rule);background:var(--paper);margin-top:20px;box-shadow:var(--shadow)}
+.sheet .cap{
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--ai);
+  padding:14px 18px;border-bottom:1px solid var(--rule);
+}
+.sheet dl{margin:0;display:grid;grid-template-columns:150px minmax(0,1fr)}
+.sheet dt,.sheet dd{padding:12px 18px;border-bottom:1px solid var(--rule-soft);margin:0;font-size:14px;line-height:1.8}
+.sheet dt{color:var(--ink-3);font-size:12.5px;letter-spacing:.04em;background:var(--ground)}
+.sheet dd{color:var(--ink)}
+.sheet dl>:nth-last-child(-n+2){border-bottom:0}
+@media(max-width:560px){
+  .sheet dl{grid-template-columns:1fr}
+  .sheet dt{border-bottom:0;padding-bottom:0;background:transparent}
+}
+
+/* ---------- example block ---------- */
+.example{border:1px dashed var(--rule);padding:24px 22px;margin-top:24px;background:var(--paper)}
+.example>.tag{
+  display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+  color:var(--ink-3);border:1px solid var(--rule);padding:4px 10px;margin-bottom:16px;
+}
+.example .sheet,.example .tw{box-shadow:none}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--rule);padding:44px 0 70px;margin-top:20px}
+.disc{border:1px solid var(--rule);background:var(--paper);padding:20px 22px;font-size:12.5px;color:var(--ink-3);line-height:1.95;max-width:52em}
+.disc b{display:block;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--ink-2);margin-bottom:10px}
+.sig{margin-top:24px;font-family:"Shippori Mincho",serif;font-size:15px;color:var(--ink)}
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <span class="kicker">事前公開ルール ／ PRE-REGISTRATION</span>
+    <h1>Project 01<br>BTCサイクル積立プロジェクト</h1>
+    <p class="sub">ブランド「金融リテラシー＝人として」の第1ケーススタディ。この文書は、検証プロトコル原則1（事前公開）に基づき、<strong>実行の前に</strong>公開するものです。</p>
+    <div class="stamps">
+      <span>ステータス <b>稼働前（記入中）</b></span>
+      <span>起草 <b>2026-08-18</b></span>
+      <span>公開 <b>——</b></span>
+      <span>改訂 <b>R-000</b></span>
+    </div>
+
+    <div class="alert">
+      <span class="badge">未完成</span>
+      <div>
+        <h2>このルールは、まだ実行できません</h2>
+        <p>本文中に <span class="blank">未記入</span> が <span class="count" id="blank-count">—</span> 箇所あります。<strong>1つでも空欄が残っているあいだは、積立を開始しません。</strong>これは意志ではなく手順として固定しています。特に <b>仮説の反証条件</b> と <b>利確ルール</b> は、埋まらないまま始めると、この検証は「知っているだけの人の記録」になります。</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="doc">
+
+    <nav class="toc">
+      <p class="t">目次</p>
+      <ol>
+        <li><a href="#s1">答えようとしている問い</a></li>
+        <li><a href="#s2">検証内容</a></li>
+        <li><a href="#s3">仮説（事前公開）</a></li>
+        <li><a href="#s4">事前公開ルール</a></li>
+        <li><a href="#s5">AI活用の検証範囲</a></li>
+        <li><a href="#s6">記録項目</a></li>
+        <li><a href="#s7">アウトプット計画</a></li>
+        <li><a href="#s8">成功の定義</a></li>
+      </ol>
+    </nav>
+
+    <main class="body">
+
+      <section id="s1">
+        <h2><span class="n">01</span>このプロジェクトが答えようとしている問い</h2>
+        <p class="lead-q">一般の実践者が、事前にルールを決め、4年間それを守り切れるのか。そのとき何が起きるのか。</p>
+        <p class="t">Bitcoinの値動きを当てることが目的ではありません。<strong>ルールを持つ人と持たない人の差</strong>を、4年間の実記録で示すことが目的です。</p>
+        <p class="t">だからこのプロジェクトは、価格が上がっても下がっても成立します。<strong>これが、相場に依存しないコンテンツ設計の核心です。</strong></p>
+      </section>
+
+      <section id="s2">
+        <h2><span class="n">02</span>検証内容</h2>
+        <ul class="plain">
+          <li>Bitcoinの4年サイクルという<strong>仮説</strong>を検証する</li>
+          <li>新NISAを活用する</li>
+          <li>BTC関連株（MSTR・メタプラネット）を積み立てる</li>
+          <li>AIを活用した利確・リスク管理を検証する</li>
+          <li>4年間の運用記録を公開する</li>
+        </ul>
+        <div class="call warn">
+          <b>注記</b>
+          これは金融リテラシーを学ぶためのケーススタディであり、<strong>特定銘柄の購入を推奨するものではありません。</strong>
+        </div>
+      </section>
+
+      <section id="s3">
+        <h2><span class="n">03</span>仮説（事前公開）</h2>
+
+        <div class="sheet">
+          <p class="cap">仮説 H-001：4年サイクル仮説</p>
+          <dl>
+            <dt>内容</dt>
+            <dd>Bitcoinの価格には、供給イベントを起点とする約4年周期の上昇・下落サイクルが存在するのではないか</dd>
+            <dt>根拠</dt>
+            <dd><span class="blank">未記入</span>（過去サイクルの観測／供給構造）</dd>
+            <dt>反証条件 ★必須</dt>
+            <dd><span class="blank">未記入</span><br>例）サイクル起点から◯ヶ月経過しても◯◯が観測されない場合、この仮説は現時点で機能していないと判断する</dd>
+            <dt>検証期間</dt>
+            <dd>4年（<span class="blank">未記入</span> 〜 <span class="blank">未記入</span>）</dd>
+            <dt>配分する資金上限</dt>
+            <dd>総金融資産の <span class="blank">未記入</span>％</dd>
+            <dt>公開日</dt>
+            <dd><span class="blank">未記入</span></dd>
+          </dl>
+        </div>
+
+        <div class="call warn">
+          <b>このブランドの規則</b>
+          <strong>反証条件は必ず埋めること。</strong>反証条件のない仮説は、仮説ではなく信仰です。このブランドでは公開しません。<br>そして、反証条件を書く行為そのものが、最高の金融リテラシー教材になります。
+        </div>
+      </section>
+
+      <section id="s4">
+        <h2><span class="n">04</span>事前公開ルール</h2>
+        <p class="t"><strong>実行の前に、以下をすべて埋めて公開します。埋まっていない項目があるうちは実行しません。</strong></p>
+
+        <h3>4-1. 資金ルール</h3>
+        <div class="tw"><table><tbody>
+          <tr><td class="k">本プロジェクトへの配分上限（対総金融資産）</td><td><span class="blank">未記入</span>％</td></tr>
+          <tr><td class="k">生活防衛資金（絶対に使わない額）</td><td><span class="blank">未記入</span>ヶ月分</td></tr>
+          <tr><td class="k">追加入金の上限（月）</td><td><span class="blank">未記入</span>円</td></tr>
+          <tr><td class="k">レバレッジ</td><td>使用しない（不変層の原則）</td></tr>
+        </tbody></table></div>
+
+        <h3>4-2. 積立ルール</h3>
+        <div class="tw"><table><tbody>
+          <tr><td class="k">対象</td><td><span class="blank">未記入</span>（現物BTC／BTC関連株／投信 等）</td></tr>
+          <tr><td class="k">口座</td><td><span class="blank">未記入</span>（新NISA成長投資枠／つみたて枠／特定口座の使い分け）</td></tr>
+          <tr><td class="k">金額・頻度</td><td>毎月<span class="blank">未記入</span>日に<span class="blank">未記入</span>円</td></tr>
+          <tr><td class="k">相場が下落したときの行動</td><td><span class="blank">未記入</span>（増額する／変えない）</td></tr>
+          <tr><td class="k">相場が急騰したときの行動</td><td><span class="blank">未記入</span>（変えない／減額する）</td></tr>
+        </tbody></table></div>
+
+        <h3>4-3. 利確ルール ★このプロジェクト最大の急所</h3>
+        <div class="call warn">
+          <b>なぜ最大の急所か</b>
+          <strong>4年サイクル仮説を「知っている」ことは、資産を増やしません。</strong>増やすのは、事前に決めた出口を実行できるかどうかです。この表が空欄のまま実行を始めた場合、本プロジェクトは「知っているだけの人」の記録になります。<br><br>
+          <strong>不変層の原則：出口を決めずに入らない。</strong>
+        </div>
+        <div class="tw"><table><tbody>
+          <tr><td class="k">判定タイミング</td><td><span class="blank">未記入</span>（月1回／週1回など、頻度を固定する）</td></tr>
+          <tr><td class="k">利確条件</td><td><span class="blank">未記入</span>（価格水準／評価益率／サイクル経過月数など、数値で定義）</td></tr>
+          <tr><td class="k">1回あたりの利確比率</td><td>保有の<span class="blank">未記入</span>％</td></tr>
+          <tr><td class="k">利確資金の行き先</td><td><span class="blank">未記入</span>（生活防衛資金／現金化／他資産）</td></tr>
+        </tbody></table></div>
+
+        <h3>4-4. リスク管理ルール</h3>
+        <div class="tw"><table><tbody>
+          <tr><td class="k">最大許容ドローダウン</td><td>−<span class="blank">未記入</span>％（超えたときの行動も事前に決める）</td></tr>
+          <tr><td class="k">停止条件（中断の基準）</td><td><span class="blank">未記入</span>（収入減／制度変更／仮説の反証 など）</td></tr>
+          <tr><td class="k">例外条項</td><td><span class="blank">未記入</span>（例外を認める条件と、その記録方法）</td></tr>
+        </tbody></table></div>
+
+        <h3>4-5. 税・制度</h3>
+        <div class="tw"><table><tbody>
+          <tr><td class="k">想定される課税区分</td><td><span class="blank">未記入</span>（※税務は必ず専門家に確認する）</td></tr>
+          <tr><td class="k">制度変更時の対応</td><td>一次情報で確認し、対応を記事化。過去記事は削除せず注記を追加する</td></tr>
+        </tbody></table></div>
+
+        <h3>4-6. 記入例</h3>
+        <div class="example">
+          <span class="tag">架空の記入例 ／ 推奨する数値ではありません</span>
+          <p class="t">この例は「どこまで具体的に書けば事前公開ルールとして機能するか」を示すためのものです。記載した数値は架空であり、特定の資産配分・売買を推奨するものではありません。実際の数値は、ご自身の収入・支出・家族構成・リスク許容度から決めてください。</p>
+
+          <div class="sheet">
+            <p class="cap">仮説 H-001（記入例）</p>
+            <dl>
+              <dt>根拠</dt>
+              <dd>過去3回のサイクルで、供給イベントから12〜18ヶ月後に高値圏、その後12〜14ヶ月かけて大幅下落という形が観測された（n=3、統計的には極めて少ない）</dd>
+              <dt>反証条件</dt>
+              <dd>供給イベントから24ヶ月を経過しても、直前サイクル高値を一度も上回らなかった場合、この仮説は現時点で機能していないと判断する</dd>
+              <dt>配分する資金上限</dt>
+              <dd>総金融資産の 10％</dd>
+            </dl>
+          </div>
+
+          <div class="tw"><table>
+            <thead><tr><th>ルール</th><th>記入例</th></tr></thead>
+            <tbody>
+              <tr><td class="k">配分上限（対総金融資産）</td><td>10％（超えたら積立を停止し、リバランスする）</td></tr>
+              <tr><td class="k">生活防衛資金</td><td>生活費12ヶ月分。ここには絶対に手をつけない</td></tr>
+              <tr><td class="k">追加入金の上限（月）</td><td>手取りの5％まで</td></tr>
+              <tr><td class="k">レバレッジ</td><td>使用しない</td></tr>
+              <tr><td class="k">積立の頻度</td><td>毎月第1営業日に定額</td></tr>
+              <tr><td class="k">下落したとき</td><td>金額を変えない（狼狽増額も減額もしない）</td></tr>
+              <tr><td class="k">急騰したとき</td><td>金額を変えない</td></tr>
+              <tr class="hot"><td class="k"><strong>利確の判定</strong></td><td><strong>毎月1回、第1営業日にのみ判定する（それ以外の日は判断しない）</strong></td></tr>
+              <tr class="hot"><td class="k"><strong>利確条件</strong></td><td><strong>供給イベントから18ヶ月経過以降、評価益率が+200％を超えた月に発動</strong></td></tr>
+              <tr class="hot"><td class="k"><strong>1回の利確比率</strong></td><td><strong>保有の20％。条件を満たすたびに繰り返す（一括利確はしない）</strong></td></tr>
+              <tr class="hot"><td class="k"><strong>利確資金の行き先</strong></td><td><strong>全額を現金化し、生活防衛資金の外側に置く（再投入しない）</strong></td></tr>
+              <tr><td class="k">最大許容ドローダウン</td><td>−70％。超えても売らないが、積立額を半分にして記録を残す</td></tr>
+              <tr><td class="k">停止条件</td><td>収入が3ヶ月連続で2割以上減った場合／反証条件に該当した場合</td></tr>
+              <tr><td class="k">例外条項</td><td>例外を認めるのは制度変更時のみ。実行前に理由を公開する</td></tr>
+            </tbody>
+          </table></div>
+
+          <div class="call">
+            <b>記入例を読むときの注意</b>
+            数値そのものより、<strong>「いつ判断するか」を固定していること</strong>に注目してください。「毎月第1営業日にのみ判定する」と決めておくと、値動きを見て衝動的に売買する余地が消えます。<strong>出口ルールの本質は、水準の設定ではなく、判断の頻度を減らすことにあります。</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="s5">
+        <h2><span class="n">05</span>AI活用の検証範囲</h2>
+        <p class="t"><strong>原則：AIは判断材料を整理する。最終判断は必ず人間が行う。</strong></p>
+        <div class="tw"><table>
+          <thead><tr><th>AIに任せる</th><th>人間が行う</th></tr></thead>
+          <tbody>
+            <tr><td>データの収集・整理</td><td>仮説の設定</td></tr>
+            <tr><td>ルール条件の充足チェック</td><td>ルールの設計・変更</td></tr>
+            <tr><td>シナリオの列挙</td><td>資金配分の決定</td></tr>
+            <tr><td>感情の言語化サポート</td><td>最終的な売買判断</td></tr>
+            <tr><td>レポートの下書き</td><td>公開する内容の責任</td></tr>
+          </tbody>
+        </table></div>
+        <h3>検証テーマ</h3>
+        <ul class="plain">
+          <li>AIに「利確条件を満たしたか」を毎月チェックさせる仕組みは機能するか</li>
+          <li>AIに反対意見（自分の判断への反論）を出させると、判断は改善するか</li>
+          <li><strong>AIの提案に従いたくなる心理は、どこで危険になるか</strong> ★最も教材価値が高い</li>
+        </ul>
+        <div class="call">
+          <b>方針</b>
+          AI活用の失敗も必ず公開します。「AIに頼りすぎた」記録は、2026年以降の金融リテラシーとして極めて価値が高いからです。
+        </div>
+      </section>
+
+      <section id="s6">
+        <h2><span class="n">06</span>記録項目（毎月）</h2>
+        <div class="tw"><table>
+          <thead><tr><th>項目</th><th>公開</th></tr></thead>
+          <tbody>
+            <tr><td>積立実行の有無・金額</td><td>公開する</td></tr>
+            <tr><td>評価損益率（％）</td><td>公開する</td></tr>
+            <tr><td>最大ドローダウン（％）</td><td>公開する</td></tr>
+            <tr class="hot"><td><strong>ルール遵守の可否</strong></td><td><strong>公開する ★最重要</strong></td></tr>
+            <tr><td>結果の4象限分類</td><td>公開する</td></tr>
+            <tr><td>判断とその理由</td><td>公開する</td></tr>
+            <tr><td>見送った判断</td><td>公開する</td></tr>
+            <tr><td>そのときの感情</td><td>公開する</td></tr>
+            <tr><td>総資産の絶対額</td><td>公開しない</td></tr>
+          </tbody>
+        </table></div>
+        <div class="call">
+          <b>％で公開する理由</b>
+          絶対額は「すごい／しょぼい」の比較を生み、再現性の話を消してしまいます。％なら、読者は自分の規模に置き換えられます。
+        </div>
+      </section>
+
+      <section id="s7">
+        <h2><span class="n">07</span>アウトプット計画</h2>
+        <div class="tw"><table class="num">
+          <thead><tr><th>種類</th><th>頻度</th><th>回数（4年）</th></tr></thead>
+          <tbody>
+            <tr><td>月次レポート</td><td>月1</td><td>48</td></tr>
+            <tr><td>四半期レビュー</td><td>四半期</td><td>16</td></tr>
+            <tr><td>年次総括</td><td>年1</td><td>4</td></tr>
+            <tr><td>失敗ログ記事</td><td>発生時</td><td>—</td></tr>
+            <tr><td>ルール変更記事</td><td>発生時</td><td>—</td></tr>
+          </tbody>
+        </table></div>
+        <p class="t" style="margin-top:20px"><strong>48ヶ月分の月次レポートは、それ自体が唯一無二のコンテンツ資産になります。</strong>4年後、これと同じものを持っている日本語の発信者は、ほとんどいません。</p>
+      </section>
+
+      <section id="s8">
+        <h2><span class="n">08</span>成功の定義</h2>
+        <p class="t">このプロジェクトの成功は、<strong>利益率では測りません。</strong></p>
+        <div class="tw"><table>
+          <thead><tr><th>指標</th><th>目標</th></tr></thead>
+          <tbody>
+            <tr><td>月次レポートの継続</td><td>48ヶ月、欠かさず公開</td></tr>
+            <tr><td>ルール遵守率</td><td>90%以上（破った場合は必ず記録・公開）</td></tr>
+            <tr><td>事後的なルール変更</td><td>0件（変更は必ず事前・理由付き）</td></tr>
+            <tr><td>失敗の公開</td><td>発生したものはすべて公開</td></tr>
+          </tbody>
+        </table></div>
+        <p class="lead-q" style="margin-top:26px">利益が出ても、記録が途切れたら失敗。<br>損失が出ても、記録が48ヶ月続いたら成功。</p>
+        <p class="t">この定義こそが、ブランド「金融リテラシー＝人として」の証明になります。</p>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <div class="disc">
+      <b>免責事項</b>
+      本文書は、筆者自身の学習および運用記録の公開を目的とした情報提供であり、特定の金融商品の取得・売却を推奨するものではありません。筆者は投資助言業者ではなく、記載内容は個人の見解です。将来の運用成果を示唆・保証するものではありません。投資判断は、ご自身の責任と判断において行ってください。記載された制度・税制は掲載時点のものであり、変更される場合があります。税務の取り扱いについては、必ず税理士等の専門家にご確認ください。
+    </div>
+    <p class="sig">人として、どう判断したか。</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var n = document.querySelectorAll(".blank").length;
+  var el = document.getElementById("blank-count");
+  el.textContent = n + " 箇所";
+  if(n === 0){
+    var alert = document.querySelector(".alert");
+    alert.querySelector(".badge").textContent = "記入済";
+    alert.querySelector("h2").textContent = "このルールは実行できます";
+  }
+})();
+</script>
