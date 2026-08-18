@@ -1,0 +1,560 @@
+<title>金融リテラシー＝人として</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --ground:#F2F4F3;
+  --paper:#FFFFFF;
+  --ink:#16232E;
+  --ink-2:#4E5F6B;
+  --ink-3:#7C8B94;
+  --rule:#D3DAD8;
+  --rule-soft:#E4E9E7;
+  --ai:#1D3E63;
+  --ai-soft:#E5EBF2;
+  --shu:#C2402A;
+  --shu-soft:#F6E6E2;
+  --grid:rgba(29,62,99,.045);
+  --shadow:0 1px 2px rgba(22,35,46,.05), 0 8px 24px -16px rgba(22,35,46,.22);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#10181F;
+    --paper:#16212B;
+    --ink:#E7EDEA;
+    --ink-2:#A2B1BA;
+    --ink-3:#75858F;
+    --rule:#2A3841;
+    --rule-soft:#212D36;
+    --ai:#8AB2DC;
+    --ai-soft:#1B2A38;
+    --shu:#E8705A;
+    --shu-soft:#2C1D1A;
+    --grid:rgba(138,178,220,.05);
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#10181F;
+  --paper:#16212B;
+  --ink:#E7EDEA;
+  --ink-2:#A2B1BA;
+  --ink-3:#75858F;
+  --rule:#2A3841;
+  --rule-soft:#212D36;
+  --ai:#8AB2DC;
+  --ai-soft:#1B2A38;
+  --shu:#E8705A;
+  --shu-soft:#2C1D1A;
+  --grid:rgba(138,178,220,.05);
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background-color:var(--ground);
+  background-image:
+    repeating-linear-gradient(to right, var(--grid) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(to bottom, var(--grid) 0 1px, transparent 1px 26px);
+  color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+  text-underline-offset:.25em;
+}
+h1,h2,h3{font-family:"Shippori Mincho","Hiragino Mincho ProN",serif;font-weight:700;text-wrap:balance;margin:0;line-height:1.45;letter-spacing:.01em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ai);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+/* ---------- header ---------- */
+.bar{
+  position:sticky;top:0;z-index:20;
+  background:var(--ground);
+  background:color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
+.brand{font-family:"Shippori Mincho",serif;font-weight:700;font-size:16px;letter-spacing:.06em;text-decoration:none}
+.brand span{color:var(--ink-3);font-weight:500}
+.navlinks{display:flex;gap:22px;font-size:13px;color:var(--ink-2)}
+.navlinks a{text-decoration:none}
+.navlinks a:hover{color:var(--ai)}
+@media(max-width:720px){.navlinks{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:88px 0 72px;border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-size:12px;letter-spacing:.22em;color:var(--ink-3);
+  display:flex;align-items:center;gap:12px;margin-bottom:26px;
+}
+.eyebrow::after{content:"";height:1px;flex:1;background:var(--rule);max-width:200px}
+.hero h1{font-size:clamp(38px,7.4vw,68px);line-height:1.28;letter-spacing:.02em}
+.hero .lead{
+  margin-top:26px;max-width:34em;color:var(--ink-2);font-size:17px;
+  border-left:2px solid var(--ai);padding-left:18px;
+}
+
+/* ---------- correction device ---------- */
+.correction{
+  margin-top:44px;max-width:38em;background:var(--paper);
+  border:1px solid var(--rule);border-radius:2px;box-shadow:var(--shadow);
+  padding:22px 24px 24px;position:relative;
+}
+.correction::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--shu);
+}
+.corr-tag{
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;
+  color:var(--shu);display:block;margin-bottom:14px;
+}
+.struck{
+  position:relative;display:inline;font-size:clamp(17px,3vw,20px);
+  font-family:"Shippori Mincho",serif;color:var(--ink-3);
+}
+.struck .line{
+  position:absolute;left:-2px;top:52%;height:2px;background:var(--shu);
+  width:0;border-radius:2px;
+}
+.in .struck .line{width:calc(100% + 4px);transition:width .75s cubic-bezier(.65,0,.35,1) .35s}
+.corr-note{
+  font-size:12.5px;color:var(--shu);margin-top:10px;letter-spacing:.02em;
+}
+.corr-arrow{display:flex;gap:12px;margin-top:20px;align-items:flex-start}
+.corr-arrow .mk{color:var(--ai);font-family:"JetBrains Mono",monospace;line-height:1.7;flex:none}
+.corr-fix{font-family:"Shippori Mincho",serif;font-size:clamp(17px,3vw,20px);font-weight:700;line-height:1.65}
+
+/* ---------- cta ---------- */
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-size:14.5px;font-weight:500;padding:13px 24px;border-radius:2px;
+  border:1px solid var(--ai);transition:transform .16s ease, background .16s ease, color .16s ease;
+}
+.btn-solid{background:var(--ai);color:var(--ground)}
+.btn-solid:hover{transform:translateY(-1px)}
+.btn-ghost{color:var(--ai);background:transparent}
+.btn-ghost:hover{background:var(--ai-soft)}
+.micro{font-size:12.5px;color:var(--ink-3);margin-top:18px}
+
+/* ---------- sections ---------- */
+.sec{padding:76px 0;border-bottom:1px solid var(--rule)}
+.grid{display:grid;grid-template-columns:150px minmax(0,1fr);gap:0}
+.mark{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.16em;
+  color:var(--ink-3);padding-top:.55em;
+}
+.mark b{display:block;font-family:"Shippori Mincho",serif;font-weight:700;font-size:15px;color:var(--ai);letter-spacing:.08em;margin-top:6px}
+.col{border-left:1px solid var(--rule);padding-left:44px;max-width:44em}
+@media(max-width:760px){
+  .grid{grid-template-columns:1fr;gap:16px}
+  .col{border-left:0;padding-left:0}
+  .mark{padding-top:0}
+  .mark b{display:inline;margin-left:10px;margin-top:0}
+}
+.sec h2{font-size:clamp(24px,4.2vw,33px);margin-bottom:22px}
+.sec p+p{margin-top:16px}
+.body-text{color:var(--ink-2);font-size:15.5px}
+.body-text strong{color:var(--ink);font-weight:700}
+
+/* ---------- lists / cards ---------- */
+.five{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
+.five div{background:var(--paper);padding:20px 18px}
+.five dt{font-family:"Shippori Mincho",serif;font-weight:700;font-size:19px;color:var(--ai);margin-bottom:8px}
+.five dd{margin:0;font-size:13px;color:var(--ink-2);line-height:1.75}
+
+.stance{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:28px}
+.stance>div{background:var(--paper);padding:18px 20px;display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:baseline}
+.stance .k{font-size:12px;letter-spacing:.12em;color:var(--ink-3);font-family:"JetBrains Mono",monospace}
+.stance .v{font-size:15px}
+.stance .v em{font-style:normal;font-family:"Shippori Mincho",serif;font-weight:700;font-size:19px;color:var(--ai)}
+@media(max-width:620px){.stance>div{grid-template-columns:1fr;gap:6px}}
+
+.promise{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:11px}
+.promise li{display:flex;gap:14px;font-size:15.5px;align-items:baseline}
+.promise .n{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ai);flex:none;letter-spacing:.08em}
+
+.steps{list-style:none;padding:0;margin:30px 0 0;counter-reset:s;display:grid;gap:0}
+.steps li{
+  counter-increment:s;padding:20px 0 20px 62px;position:relative;border-top:1px solid var(--rule-soft);
+}
+.steps li:last-child{border-bottom:1px solid var(--rule-soft)}
+.steps li::before{
+  content:counter(s,decimal-leading-zero);position:absolute;left:0;top:22px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--shu);letter-spacing:.1em;
+}
+.steps b{font-family:"Shippori Mincho",serif;font-size:18px;display:block;margin-bottom:5px}
+.steps span{font-size:14px;color:var(--ink-2)}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin-top:30px;border:1px solid var(--rule);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:14px}
+caption{text-align:left;font-size:12px;color:var(--ink-3);padding:14px 18px 0;font-family:"JetBrains Mono",monospace;letter-spacing:.1em}
+th,td{padding:14px 18px;border:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+thead th{font-size:12px;letter-spacing:.08em;color:var(--ink-3);font-weight:500;background:var(--ai-soft)}
+tbody th{font-size:12px;letter-spacing:.08em;color:var(--ink-3);font-weight:500;white-space:nowrap}
+td .q{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3);display:block;margin-bottom:4px}
+td.danger{background:var(--shu-soft)}
+td.danger .q{color:var(--shu)}
+td.danger b{color:var(--shu)}
+td b{font-weight:700}
+.num td:last-child,.num th:last-child{text-align:right;font-family:"JetBrains Mono",monospace}
+.note{font-size:13px;color:var(--ink-3);margin-top:14px}
+
+.pull{
+  margin-top:32px;font-family:"Shippori Mincho",serif;font-weight:700;
+  font-size:clamp(19px,3.4vw,25px);line-height:1.6;color:var(--ink);
+  border-top:2px solid var(--ai);padding-top:22px;max-width:26em;
+}
+
+/* ---------- split ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
+.split>div{background:var(--paper);padding:24px 22px}
+.split h3{font-size:16px;margin-bottom:4px}
+.split .price{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--ink-3);margin-bottom:16px;display:block}
+.split ul{margin:0;padding-left:1.1em;font-size:14px;color:var(--ink-2);display:grid;gap:7px}
+@media(max-width:620px){.split{grid-template-columns:1fr}}
+
+/* ---------- project ---------- */
+.proj{border:1px solid var(--rule);background:var(--paper);padding:28px;margin-top:30px;box-shadow:var(--shadow)}
+.proj .tag{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;color:var(--shu);display:block;margin-bottom:12px}
+.proj h3{font-size:21px;margin-bottom:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:20px;margin-top:24px;padding-top:22px;border-top:1px solid var(--rule-soft)}
+.stats div{display:flex;flex-direction:column;gap:4px}
+.stats .fig{font-family:"JetBrains Mono",monospace;font-size:26px;font-weight:500;color:var(--ai);line-height:1}
+.stats .fig small{font-size:15px;margin-left:1px}
+.stats .lab{font-size:11.5px;color:var(--ink-3);letter-spacing:.06em}
+
+/* ---------- signup ---------- */
+.signup{padding:78px 0;border-bottom:1px solid var(--rule)}
+.form{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap;max-width:32em}
+.form input{
+  flex:1 1 220px;padding:13px 15px;font:inherit;font-size:14.5px;
+  border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:2px;
+}
+.form input::placeholder{color:var(--ink-3)}
+.form button{font:inherit;cursor:pointer}
+.status{font-size:13px;color:var(--ai);margin-top:14px;min-height:1.4em}
+
+/* ---------- footer ---------- */
+.foot{padding:56px 0 72px;font-size:12.5px;color:var(--ink-3);line-height:1.95}
+.foot .slogan{font-family:"Shippori Mincho",serif;font-size:16px;color:var(--ink);line-height:1.75;margin-bottom:26px;max-width:24em}
+.disclaimer{border:1px solid var(--rule);padding:20px 22px;background:var(--paper);max-width:52em}
+.disclaimer b{display:block;color:var(--ink-2);font-size:12px;letter-spacing:.14em;margin-bottom:10px;font-family:"JetBrains Mono",monospace}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .in .struck .line{transition:none;width:calc(100% + 4px)}
+  .btn:hover{transform:none}
+}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">人として<span>｜金融リテラシー</span></a>
+    <nav class="navlinks">
+      <a href="#rinen">理念</a>
+      <a href="#tachiba">立場</a>
+      <a href="#kensho">検証</a>
+      <a href="#deguchi">出口</a>
+      <a href="#kiroku">記録</a>
+      <a href="#hajimeru">はじめる</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero rv">
+    <div class="wrap">
+      <p class="eyebrow">金融リテラシー＝人として</p>
+      <h1>予測を手放し、<br>規律を掲げる。</h1>
+      <p class="lead">金融リテラシーは、お金の知識ではない。<br>人生の選択肢を増やす力である。</p>
+
+      <div class="correction">
+        <span class="corr-tag">訂正記録 R-001</span>
+        <p><span class="struck">バブルを知っていれば、資産は必ず増える。<span class="line"></span></span></p>
+        <p class="corr-note">朱書き：「必ず」は使わない。市場について、私は断定しない。</p>
+        <div class="corr-arrow">
+          <span class="mk">→</span>
+          <p class="corr-fix">出口を事前に決め、実行できた人が、資産を残せる確率を上げる。</p>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-solid" href="#hajimeru">月次レポートを受け取る</a>
+        <a class="btn btn-ghost" href="#kensho">検証のしかたを読む</a>
+      </div>
+      <p class="micro">相場予想は配信しません。個別銘柄の推奨もしません。届くのは、判断と、その理由と、失敗の記録です。</p>
+    </div>
+  </section>
+
+  <section class="sec rv" id="rinen">
+    <div class="wrap grid">
+      <div class="mark">RINEN<b>理念</b></div>
+      <div class="col">
+        <h2>お金の知識ではなく、<br>人生を生き抜く力として。</h2>
+        <p class="body-text">日本には、いまも「学校では金融を学ばない」「投資は怖い」「お金の話はいやらしい」という前提が残っています。</p>
+        <p class="body-text">一方で、AI、インフレ、新NISA、世界経済。お金の知識が人生に与える影響は、年々大きくなっています。</p>
+        <p class="body-text">だから私は、金融リテラシーを投資の技術としてではなく、<strong>人生の選択肢を増やす教養</strong>として扱います。学ぶ範囲は、投資だけではありません。</p>
+
+        <dl class="five">
+          <div><dt>稼ぐ</dt><dd>自分の労働と資本を、どう収入に変えるか</dd></div>
+          <div><dt>守る</dt><dd>税・制度・詐欺・インフレから、どう資産を守るか</dd></div>
+          <div><dt>増やす</dt><dd>時間と複利を、どう味方につけるか</dd></div>
+          <div><dt>使う</dt><dd>お金を、何と交換するのが自分にとって価値か</dd></div>
+          <div><dt>残す</dt><dd>次の世代・次の自分に、何を渡すか</dd></div>
+        </dl>
+        <p class="note">この5つを扱うから、このブランドは投資だけを扱いません。核にあるのは「人として、お金とどう向き合うか」という問いです。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rv" id="tachiba">
+    <div class="wrap grid">
+      <div class="mark">TACHIBA<b>立場</b></div>
+      <div class="col">
+        <h2>私は、専門家ではありません。</h2>
+        <p class="body-text">投資のプロでも、ファンドマネージャーでも、証券アナリストでもありません。だから未来を断言しません。予想も売りません。</p>
+
+        <div class="stance">
+          <div><span class="k">名乗らない</span><span class="v">プロ／ファンドマネージャー／アナリスト</span></div>
+          <div><span class="k">しない</span><span class="v">未来の断言／予想の販売／個別銘柄の推奨</span></div>
+          <div><span class="k">名乗る</span><span class="v"><em>実践者</em>　一緒に学び、一緒に考える立場</span></div>
+        </div>
+
+        <p class="body-text" style="margin-top:30px">ただし、断言をやめるわけではありません。<strong>向ける先を変えます。</strong></p>
+
+        <div class="tw">
+          <table>
+            <caption>断言の対象</caption>
+            <thead><tr><th>市場については断定しない</th><th>自分の原則については断言する</th></tr></thead>
+            <tbody>
+              <tr><td>「これは上がります」</td><td><b>「私は生活防衛資金に手を出しません」</b></td></tr>
+              <tr><td>「いまが買い時です」</td><td><b>「ルールを破って得た利益を、私は失敗と呼びます」</b></td></tr>
+              <tr><td>「必ず増えます」</td><td><b>「私は、出口を決めずに入りません」</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">予測を断言する人は、外れた瞬間に信用を失います。原則を断言する人は、守り続けるかぎり信用が増えていきます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rv" id="yakusoku">
+    <div class="wrap grid">
+      <div class="mark">YAKUSOKU<b>約束</b></div>
+      <div class="col">
+        <h2>見せるのは、結果ではなく<br>判断そのものです。</h2>
+        <ul class="promise">
+          <li><span class="n">01</span><span>利益<strong>だけ</strong>を見せません。</span></li>
+          <li><span class="n">02</span><span>失敗を公開します。</span></li>
+          <li><span class="n">03</span><span>迷いを公開します。</span></li>
+          <li><span class="n">04</span><span>改善を公開します。</span></li>
+          <li><span class="n">05</span><span>ルールを変えるときは、<strong>理由と一緒に</strong>公開します。</span></li>
+        </ul>
+        <p class="body-text" style="margin-top:26px">そして、結果だけでなく「どう考えたのか」「なぜその判断をしたのか」まで公開します。</p>
+        <p class="body-text">過去の発言は消しません。<strong>訂正は、取り消し線を引いて残します。</strong>このページの冒頭にある朱書きが、その一例です。履歴が消えると、信頼の証拠も消えるからです。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rv" id="kensho">
+    <div class="wrap grid">
+      <div class="mark">KENSHO<b>検証</b></div>
+      <div class="col">
+        <h2>事前に決めて、公開してから、<br>実行します。</h2>
+        <p class="body-text">「予想しません、検証します」と言うだけなら誰にでもできます。差が出るのは、それを<strong>外から確かめられる形</strong>にしているかどうかです。</p>
+
+        <ol class="steps">
+          <li><b>事前公開</b><span>積立・利確・損切り・リバランスの基準を、実行の前に文書で公開します。後から「実はこう決めていた」は認めません。</span></li>
+          <li><b>全記録</b><span>損失も利益と同じ形式で残します。やらなかった判断も、そのときの感情も記録します。</span></li>
+          <li><b>変更の透明化</b><span>ルールは変えます。ただし何を・なぜ・いつから・何が改善すると考えたかを、必ず添えます。</span></li>
+        </ol>
+
+        <div class="tw">
+          <table>
+            <caption>結果の4分類 ── 「当たった／外れた」で語らない</caption>
+            <thead><tr><th></th><th>ルールを守った</th><th>ルールを破った</th></tr></thead>
+            <tbody>
+              <tr>
+                <th>結果が良い</th>
+                <td><span class="q">01</span><b>再現性あり</b><br>最も価値のある結果</td>
+                <td class="danger"><span class="q">03</span><b>危険な成功</b><br>最も警戒すべき結果</td>
+              </tr>
+              <tr>
+                <th>結果が悪い</th>
+                <td><span class="q">02</span><b>想定内の損失</b><br>仮説の検証材料</td>
+                <td><span class="q">04</span><b>明確な失敗</b><br>最優先で改善する</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">なぜ 03 が最も危険か。ルールを破って儲かると、脳は「ルールは不要だ」と学習するからです。だから 03 が出たときは、01 より詳しく書きます。</p>
+
+        <p class="pull">良い判断と良い結果は、別物です。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rv" id="deguchi">
+    <div class="wrap grid">
+      <div class="mark">DEGUCHI<b>出口</b></div>
+      <div class="col">
+        <h2>資産を決めるのは知識ではなく、<br>事前に決めた出口です。</h2>
+        <p class="body-text">「知っていれば増える」と考えるとき、私たちはたいてい第1層の話をしています。けれど資産が動くのは、第3層です。</p>
+
+        <ol class="steps">
+          <li><b>認識</b><span>「これはバブルかもしれない」と気づく。──ほとんどの人がここで止まります。ここまでは資産に影響しません。</span></li>
+          <li><b>規律</b><span>気づきを「事前のルール」に変換する。どの条件で、何％を、いつ降りるか。ここで初めて行動が変わります。</span></li>
+          <li><b>退出</b><span>決めたとおりに、実際に降りる。ここまで来て、はじめて資産が残ります。</span></li>
+        </ol>
+
+        <div class="tw">
+          <table class="num">
+            <caption>下落と回復は、対称ではない</caption>
+            <thead><tr><th>下落率</th><th>元に戻すのに必要な上昇率</th></tr></thead>
+            <tbody>
+              <tr><td>−50%</td><td>+100%</td></tr>
+              <tr><td>−70%</td><td>+233%</td></tr>
+              <tr><td>−80%</td><td>+400%</td></tr>
+              <tr><td>−90%</td><td>+900%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">これは意見ではなく算数です。そして時間の問題もあります。日経平均株価が1989年末の高値を回復したのは2024年2月でした。約34年です。</p>
+
+        <p class="pull">出口を持たない保有は、含み益を最大にして、そのまま返します。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rv" id="kiroku">
+    <div class="wrap grid">
+      <div class="mark">KIROKU<b>記録</b></div>
+      <div class="col">
+        <h2>いま公開している検証</h2>
+
+        <div class="proj">
+          <span class="tag">PROJECT 01 ／ 稼働中</span>
+          <h3>BTCサイクル積立プロジェクト</h3>
+          <p class="body-text">Bitcoinの値動きを当てることが目的ではありません。答えようとしている問いは一つです。<strong>「一般の実践者が、事前にルールを決め、4年間それを守り切れるのか」</strong></p>
+          <p class="body-text" style="margin-top:14px">4年サイクルという<strong>仮説</strong>を、新NISAの活用、関連銘柄の積立、AIによる利確・リスク管理とあわせて検証し、その全記録を公開します。</p>
+
+          <div class="stats">
+            <div><span class="fig">48</span><span class="lab">公開予定の月次レポート</span></div>
+            <div><span class="fig">4</span><span class="lab">検証期間（年）</span></div>
+            <div><span class="fig">90<small>%</small></span><span class="lab">目標ルール遵守率</span></div>
+            <div><span class="fig">0</span><span class="lab">事後的なルール変更</span></div>
+          </div>
+        </div>
+
+        <p class="body-text" style="margin-top:28px"><strong>このプロジェクトの成功は、利益率では測りません。</strong>利益が出ても記録が途切れたら失敗。損失が出ても記録が48ヶ月続いたら成功です。だからこの検証は、価格が上がっても下がっても成立します。</p>
+        <p class="note">※ これは金融リテラシーを学ぶためのケーススタディであり、特定銘柄の購入を推奨するものではありません。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rv" id="teikyo">
+    <div class="wrap grid">
+      <div class="mark">TEIKYO<b>提供</b></div>
+      <div class="col">
+        <h2>「考え方」は無料。<br>「仕組み」は有料。</h2>
+        <p class="body-text">考え方をすべて無料で出すから信頼が生まれ、仕組みを有料にするから続けられます。無料部分をわざと不完全にして誘導することはしません。</p>
+
+        <div class="split">
+          <div>
+            <h3>無料で公開するもの</h3>
+            <span class="price">FREE</span>
+            <ul>
+              <li>月次レポート・運用結果</li>
+              <li>判断とその理由</li>
+              <li>失敗談・改善点</li>
+              <li>金融リテラシーと思考法</li>
+              <li>AI活用の検証事例</li>
+            </ul>
+          </div>
+          <div>
+            <h3>有料で提供するもの</h3>
+            <span class="price">PAID</span>
+            <ul>
+              <li>運用テンプレート・判定シート</li>
+              <li>AIプロンプト・自動計算ツール</li>
+              <li>ダッシュボード・運用OS</li>
+              <li>実践マニュアル・ケーススタディ</li>
+              <li>コミュニティ</li>
+            </ul>
+          </div>
+        </div>
+        <p class="note">有料コンテンツは「この銘柄を買えば儲かる」という情報ではありません。<strong>自分で判断できる力</strong>を育てるための仕組みを提供することを目的としています。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup rv" id="hajimeru">
+    <div class="wrap grid">
+      <div class="mark">HAJIMERU<b>はじめる</b></div>
+      <div class="col">
+        <h2>月次レポートを受け取る</h2>
+        <p class="body-text">毎月1回、その月の判断・数字・ルールを守れたかどうか・失敗を、同じ形式でお届けします。売り込みはありません。いつでも解除できます。</p>
+        <form class="form" id="signup-form">
+          <label for="email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">メールアドレス</label>
+          <input id="email" type="email" required placeholder="メールアドレス" autocomplete="email">
+          <button class="btn btn-solid" type="submit">登録する</button>
+        </form>
+        <p class="status" id="signup-status" role="status" aria-live="polite"></p>
+        <p class="micro">今日できることを1つだけ。いま持っている資産について「どうなったら、どれだけ、降りるのか」を1行書いてみてください。書けなければ、それは知っているのではなく、見ているだけです。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap grid">
+      <div class="mark">〆<b>金融リテラシー＝人として</b></div>
+      <div class="col">
+        <p class="slogan">金融リテラシーは、お金の知識ではない。<br>人生の選択肢を増やす力である。</p>
+        <div class="disclaimer">
+          <b>免責事項</b>
+          本サイトは、筆者自身の学習および運用記録の公開を目的とした情報提供であり、特定の金融商品の取得・売却を推奨するものではありません。筆者は投資助言業者ではなく、記載内容は個人の見解です。将来の運用成果を示唆・保証するものではありません。投資判断は、ご自身の責任と判断において行ってください。記載された制度・税制は掲載時点のものであり、変更される場合があります。歴史的な事実として記載した数値・出来事は一般に報じられている情報に基づきますが、投資判断に用いる際はご自身で一次情報をご確認ください。
+        </div>
+        <p style="margin-top:22px">人として、どう判断したか。</p>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var items = document.querySelectorAll(".rv");
+  if(reduce || !("IntersectionObserver" in window)){
+    items.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, {rootMargin:"0px 0px -12% 0px", threshold:0.08});
+    items.forEach(function(el){ io.observe(el); });
+  }
+
+  var form = document.getElementById("signup-form");
+  var status = document.getElementById("signup-status");
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    status.textContent = "このページは公開前のデザイン案です。配信サービスに接続すると、この登録が有効になります。";
+  });
+})();
+</script>
