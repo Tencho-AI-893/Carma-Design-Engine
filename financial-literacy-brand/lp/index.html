@@ -250,6 +250,44 @@ td b{font-weight:700}
 .disclaimer{border:1px solid var(--rule);padding:20px 22px;background:var(--paper);max-width:52em}
 .disclaimer b{display:block;color:var(--ink-2);font-size:12px;letter-spacing:.14em;margin-bottom:10px;font-family:"JetBrains Mono",monospace}
 
+/* ---------- declaration ---------- */
+.decl{
+  margin-top:34px;max-width:38em;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:16px 0;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;
+}
+.decl .stamp{
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.16em;color:var(--ai);
+  border:1px solid var(--ai);padding:4px 9px;white-space:nowrap;
+}
+.decl p{font-size:13.5px;color:var(--ink-2);line-height:1.8}
+.decl .meta{display:block;margin-top:7px;font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-3);letter-spacing:.06em}
+@media(max-width:560px){.decl{grid-template-columns:1fr;gap:10px}.decl .stamp{justify-self:start}}
+
+.lead-in{font-size:13.5px;color:var(--ink-3);margin-top:40px;margin-bottom:-28px;max-width:38em}
+
+/* ---------- tldr ---------- */
+.tldr{
+  display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline;
+  background:var(--ai-soft);padding:15px 18px;margin-bottom:26px;border-left:2px solid var(--ai);
+}
+.tldr .k{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--ai);white-space:nowrap}
+.tldr p{font-size:14.5px;line-height:1.8}
+@media(max-width:560px){.tldr{grid-template-columns:1fr;gap:7px}}
+
+/* ---------- status line ---------- */
+.status-line{
+  display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline;margin-top:26px;
+  padding:15px 18px;border:1px dashed var(--rule);background:var(--paper);
+}
+.status-line .k{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--ink-3)}
+.status-line .v{font-size:14.5px}
+.status-line .v b{font-family:"JetBrains Mono",monospace;font-size:17px;color:var(--shu)}
+
+.warm{
+  font-family:"Shippori Mincho",serif;font-size:16px;line-height:1.8;color:var(--ink);
+  margin-top:14px;max-width:30em;
+}
+
 /* ---------- reveal ---------- */
 .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
 .rv.in{opacity:1;transform:none}
@@ -282,8 +320,10 @@ td b{font-weight:700}
       <h1>予測を手放し、<br>規律を掲げる。</h1>
       <p class="lead">金融リテラシーは、お金の知識ではない。<br>人生の選択肢を増やす力である。</p>
 
+      <p class="lead-in">このページも、訂正から始めます。</p>
+
       <div class="correction">
-        <span class="corr-tag">訂正記録 R-001</span>
+        <span class="corr-tag">訂正記録 R-001 ／ このブランドの最初の訂正</span>
         <p><span class="struck">バブルを知っていれば、資産は必ず増える。<span class="line"></span></span></p>
         <p class="corr-note">朱書き：「必ず」は使わない。市場について、私は断定しない。</p>
         <div class="corr-arrow">
@@ -293,10 +333,17 @@ td b{font-weight:700}
       </div>
 
       <div class="cta-row">
-        <a class="btn btn-solid" href="#hajimeru">月次レポートを受け取る</a>
+        <a class="btn btn-solid" href="#hajimeru">第1回から受け取る</a>
         <a class="btn btn-ghost" href="#kensho">検証のしかたを読む</a>
       </div>
       <p class="micro">相場予想は配信しません。個別銘柄の推奨もしません。届くのは、判断と、その理由と、失敗の記録です。</p>
+      <p class="warm">わからないことを、わからないまま置いておかなくていい。<br>一緒に学び、一緒に考えます。</p>
+
+      <div class="decl">
+        <span class="stamp">事前公開</span>
+        <p>このページは、募集ではありません。私がこれから何をするかを、<strong>実行の前に</strong>公開する宣言です。内容を変えるときは、理由とともに改訂番号を上げて公開します。
+        <span class="meta">公開日 2026-08-18 ／ 改訂 R-001</span></p>
+      </div>
     </div>
   </section>
 
@@ -375,6 +422,7 @@ td b{font-weight:700}
       <div class="mark">KENSHO<b>検証</b></div>
       <div class="col">
         <h2>事前に決めて、公開してから、<br>実行します。</h2>
+        <div class="tldr"><span class="k">要約</span><p>ルールを先に公開しておくと、あとから話を作り替えられません。だから結果ではなく、<strong>ルールを守れたかどうか</strong>で自分を評価します。</p></div>
         <p class="body-text">「予想しません、検証します」と言うだけなら誰にでもできます。差が出るのは、それを<strong>外から確かめられる形</strong>にしているかどうかです。</p>
 
         <ol class="steps">
@@ -413,6 +461,7 @@ td b{font-weight:700}
       <div class="mark">DEGUCHI<b>出口</b></div>
       <div class="col">
         <h2>資産を決めるのは知識ではなく、<br>事前に決めた出口です。</h2>
+        <div class="tldr"><span class="k">要約</span><p>気づくこと（認識）と、決めること（規律）と、降りること（退出）は別の行為です。<strong>資産が動くのは、3つ目だけ</strong>です。</p></div>
         <p class="body-text">「知っていれば増える」と考えるとき、私たちはたいてい第1層の話をしています。けれど資産が動くのは、第3層です。</p>
 
         <ol class="steps">
@@ -460,7 +509,13 @@ td b{font-weight:700}
           </div>
         </div>
 
-        <p class="body-text" style="margin-top:28px"><strong>このプロジェクトの成功は、利益率では測りません。</strong>利益が出ても記録が途切れたら失敗。損失が出ても記録が48ヶ月続いたら成功です。だからこの検証は、価格が上がっても下がっても成立します。</p>
+        <div class="status-line">
+          <span class="k">現在の状態</span>
+          <span class="v">公開済みの月次レポート <b>0</b> 本 ／ 第1回はこれからです</span>
+        </div>
+        <p class="body-text" style="margin-top:24px">記録はまだ1本もありません。だからこのページは実績の紹介ではなく、<strong>これから48回続ける、という宣言</strong>です。第1回から最終回まで、すべてに立ち会えるのは今だけです。</p>
+
+        <p class="body-text" style="margin-top:20px"><strong>このプロジェクトの成功は、利益率では測りません。</strong>利益が出ても記録が途切れたら失敗。損失が出ても記録が48ヶ月続いたら成功です。だからこの検証は、価格が上がっても下がっても成立します。</p>
         <p class="note">※ これは金融リテラシーを学ぶためのケーススタディであり、特定銘柄の購入を推奨するものではありません。</p>
       </div>
     </div>
@@ -475,8 +530,8 @@ td b{font-weight:700}
 
         <div class="split">
           <div>
-            <h3>無料で公開するもの</h3>
-            <span class="price">FREE</span>
+            <h3>いま公開しているもの</h3>
+            <span class="price">FREE ／ 提供中</span>
             <ul>
               <li>月次レポート・運用結果</li>
               <li>判断とその理由</li>
@@ -486,8 +541,8 @@ td b{font-weight:700}
             </ul>
           </div>
           <div>
-            <h3>有料で提供するもの</h3>
-            <span class="price">PAID</span>
+            <h3>これから提供するもの</h3>
+            <span class="price">PAID ／ 未提供・Year 2以降</span>
             <ul>
               <li>運用テンプレート・判定シート</li>
               <li>AIプロンプト・自動計算ツール</li>
@@ -497,6 +552,7 @@ td b{font-weight:700}
             </ul>
           </div>
         </div>
+        <p class="note"><strong>右側は、現時点では存在しません。</strong>1年分の記録が積み上がる前に売ることを、私は自分に禁じています。実績のない伴走を売るのは、まだ存在しない信頼を担保にすることだからです。</p>
         <p class="note">有料コンテンツは「この銘柄を買えば儲かる」という情報ではありません。<strong>自分で判断できる力</strong>を育てるための仕組みを提供することを目的としています。</p>
       </div>
     </div>
@@ -506,8 +562,8 @@ td b{font-weight:700}
     <div class="wrap grid">
       <div class="mark">HAJIMERU<b>はじめる</b></div>
       <div class="col">
-        <h2>月次レポートを受け取る</h2>
-        <p class="body-text">毎月1回、その月の判断・数字・ルールを守れたかどうか・失敗を、同じ形式でお届けします。売り込みはありません。いつでも解除できます。</p>
+        <h2>第1回から受け取る</h2>
+        <p class="body-text">毎月1回、その月の判断・数字・ルールを守れたかどうか・失敗を、同じ形式でお届けします。<strong>創刊はこれからです。</strong>売り込みはありません。いつでも解除できます。</p>
         <form class="form" id="signup-form">
           <label for="email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">メールアドレス</label>
           <input id="email" type="email" required placeholder="メールアドレス" autocomplete="email">
@@ -527,8 +583,16 @@ td b{font-weight:700}
         <div class="disclaimer">
           <b>免責事項</b>
           本サイトは、筆者自身の学習および運用記録の公開を目的とした情報提供であり、特定の金融商品の取得・売却を推奨するものではありません。筆者は投資助言業者ではなく、記載内容は個人の見解です。将来の運用成果を示唆・保証するものではありません。投資判断は、ご自身の責任と判断において行ってください。記載された制度・税制は掲載時点のものであり、変更される場合があります。歴史的な事実として記載した数値・出来事は一般に報じられている情報に基づきますが、投資判断に用いる際はご自身で一次情報をご確認ください。
+          <br><br>
+          <b style="margin-top:0">広告・PRの表示について</b>
+          プロモーションを含むコンテンツには、本文の冒頭に「本記事にはプロモーションを含みます」と表示します。表示位置は、掲載の有無にかかわらず、あらかじめここに定めています。
         </div>
-        <p style="margin-top:22px">人として、どう判断したか。</p>
+        <div class="decl" style="margin-top:26px">
+          <span class="stamp">事前公開</span>
+          <p>この宣言は 2026-08-18 に公開しました。変更する場合は、変更点・理由・適用日を添えて公開し、改訂番号を上げます。過去の版は削除しません。
+          <span class="meta">改訂 R-001</span></p>
+        </div>
+        <p style="margin-top:26px">人として、どう判断したか。</p>
       </div>
     </div>
   </footer>
