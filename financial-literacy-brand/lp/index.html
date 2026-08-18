@@ -259,6 +259,20 @@ td b{font-weight:700}
   font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-3);letter-spacing:.08em;
 }
 
+/* ---------- signup lock ---------- */
+.locked{
+  margin-top:26px;max-width:36em;border:1px solid var(--rule);background:var(--paper);
+  padding:18px 20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;
+}
+.locked .k{
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--ink-3);
+  border:1px solid var(--rule);padding:4px 9px;white-space:nowrap;
+}
+.locked p{font-size:14px;color:var(--ink-2);line-height:1.85}
+.locked[hidden]{display:none}
+@media(max-width:560px){.locked{grid-template-columns:1fr;gap:10px}.locked .k{justify-self:start}}
+.form.is-locked{opacity:.45;pointer-events:none}
+
 /* ---------- signup ---------- */
 .signup{padding:78px 0;border-bottom:1px solid var(--rule)}
 .form{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap;max-width:32em}
@@ -369,7 +383,7 @@ td b{font-weight:700}
       <div class="decl">
         <span class="stamp">事前公開</span>
         <p>このページは、募集ではありません。私がこれから何をするかを、<strong>実行の前に</strong>公開する宣言です。内容を変えるときは、理由とともに改訂番号を上げて公開します。
-        <span class="meta">公開日 2026-08-18 ／ 改訂 R-002（改訂履歴は CHANGELOG に記録）</span></p>
+        <span class="meta">起草 2026-08-18 ／ 公開 —— ／ 改訂 R-002</span></p>
       </div>
     </div>
   </section>
@@ -627,19 +641,35 @@ td b{font-weight:700}
       <div class="col">
         <h2>第1回から受け取る</h2>
         <p class="body-text">毎月1回、その月の判断・数字・ルールを守れたかどうか・失敗を、同じ形式でお届けします。<strong>創刊はこれからです。</strong>売り込みはありません。いつでも解除できます。</p>
+
+        <div class="locked" id="signup-lock">
+          <span class="k">受付前</span>
+          <p><strong>メールアドレスは、いまはお預かりしません。</strong>個人情報の取り扱い方針を整え、第1回をお届けできる準備が整った時点で受付を開きます。まだ何も届けられない段階で、最も重い個人情報だけ先に預かることを、自分に禁じているからです。</p>
+        </div>
         <!--
-          ▼ メール配信サービスへの接続方法
-            1) data-endpoint に配信サービスのフォーム送信先URLを入れる
-               （例：Mailchimp / ConvertKit / Brevo などのフォームPOST先）
-            2) name 属性が配信サービス側の項目名と一致しているか確認する
-            3) endpoint が空のあいだは、送信しても登録されず案内だけが出ます
+          ▼ 受付を開くときの手順（3つとも済ませてから開くこと）
+
+            1) 個人情報の取り扱い方針（プライバシーポリシー）を公開し、
+               下の免責欄からリンクする　※これが先。順序を変えない
+            2) data-endpoint に配信サービスのフォーム送信先URLを入れる
+            3) data-mode を配信サービスに合わせて選ぶ
+                 native … ページ遷移して送信（Mailchimp / ConvertKit など。
+                           ブラウザから直接送信できないサービスはこちら）
+                 fetch  … ページを離れずに送信し、成否も表示できる
+                           （Formspree / Brevo など、外部送信を許可しているサービス）
+
+            data-endpoint が空のあいだ、受付欄は自動的に閉じたままになります。
+            ※このページをArtifactのプレビューで開いている場合、外部への送信は
+              仕組み上ブロックされます。実際の送信は、ご自身のサーバーに
+              設置したときに動作します。
         -->
-        <form class="form" id="signup-form" data-endpoint="" method="post">
+        <form class="form" id="signup-form" data-endpoint="" data-mode="native" method="post">
           <label for="email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">メールアドレス</label>
           <input id="email" name="email" type="email" required placeholder="メールアドレス" autocomplete="email">
           <button class="btn btn-solid" type="submit">登録する</button>
         </form>
         <p class="status" id="signup-status" role="status" aria-live="polite"></p>
+        <p class="micro" id="alt-cta">受付が始まるまでは、このページをブックマークしておいてください。開いたときに、この欄が入力できるようになります。</p>
         <p class="micro">今日できることを1つだけ。いま持っている資産について「どうなったら、どれだけ、降りるのか」を1行書いてみてください。書けなければ、それは知っているのではなく、見ているだけです。</p>
       </div>
     </div>
@@ -654,13 +684,16 @@ td b{font-weight:700}
           <b>免責事項</b>
           本サイトは、筆者自身の学習および運用記録の公開を目的とした情報提供であり、特定の金融商品の取得・売却を推奨するものではありません。筆者は投資助言業者ではなく、記載内容は個人の見解です。将来の運用成果を示唆・保証するものではありません。投資判断は、ご自身の責任と判断において行ってください。記載された制度・税制は掲載時点のものであり、変更される場合があります。歴史的な事実として記載した数値・出来事は一般に報じられている情報に基づきますが、投資判断に用いる際はご自身で一次情報をご確認ください。
           <br><br>
+          <b style="margin-top:0">個人情報の取り扱いについて</b>
+          メールアドレスの受付は、個人情報の取り扱い方針を公開したうえで開始します。受付開始時に、この位置へ方針へのリンクを掲載します。取得した情報は、月次レポートの配信以外の目的では利用しません。
+          <br><br>
           <b style="margin-top:0">広告・PRの表示について</b>
           プロモーションを含むコンテンツには、本文の冒頭に「本記事にはプロモーションを含みます」と表示します。表示位置は、掲載の有無にかかわらず、あらかじめここに定めています。
         </div>
         <div class="decl" style="margin-top:26px">
           <span class="stamp">事前公開</span>
-          <p>この宣言は 2026-08-18 に公開しました。変更する場合は、変更点・理由・適用日を添えて公開し、改訂番号を上げます。過去の版は削除しません。
-          <span class="meta">改訂 R-002</span></p>
+          <p>この宣言は 2026-08-18 に起草しました。公開日は、実際に公開した日を記入します。変更する場合は、変更点・理由・適用日を添えて公開し、改訂番号を上げます。過去の版は削除しません。
+          <span class="meta">起草 2026-08-18 ／ 公開 —— ／ 改訂 R-002</span></p>
         </div>
         <p style="margin-top:26px">人として、どう判断したか。</p>
       </div>
@@ -686,13 +719,29 @@ td b{font-weight:700}
 
   var form = document.getElementById("signup-form");
   var status = document.getElementById("signup-status");
+  var lock = document.getElementById("signup-lock");
+  var altCta = document.getElementById("alt-cta");
+  var endpoint = (form.getAttribute("data-endpoint") || "").trim();
+
+  if(!endpoint){
+    // 受付前：欄を閉じ、理由を表示したままにする
+    form.classList.add("is-locked");
+    form.querySelectorAll("input,button").forEach(function(el){
+      el.disabled = true;
+      el.setAttribute("tabindex","-1");
+    });
+  } else {
+    lock.hidden = true;
+    altCta.hidden = true;
+    form.setAttribute("action", endpoint);
+  }
+
   form.addEventListener("submit", function(ev){
-    ev.preventDefault();
-    var endpoint = (form.getAttribute("data-endpoint") || "").trim();
-    if(!endpoint){
-      status.textContent = "このページはまだ配信サービスに接続していません。接続後、この登録が有効になります。";
-      return;
+    if(!endpoint){ ev.preventDefault(); return; }
+    if((form.getAttribute("data-mode") || "native") === "native"){
+      return; // 通常のフォーム送信で配信サービスへ遷移する
     }
+    ev.preventDefault();
     var btn = form.querySelector("button");
     btn.disabled = true;
     status.textContent = "送信しています…";
