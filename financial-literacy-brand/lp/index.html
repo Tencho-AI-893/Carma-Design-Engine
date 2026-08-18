@@ -233,6 +233,32 @@ td b{font-weight:700}
 .stats .fig small{font-size:15px;margin-left:1px}
 .stats .lab{font-size:11.5px;color:var(--ink-3);letter-spacing:.06em}
 
+/* ---------- faq ---------- */
+.faq{margin-top:28px;border-top:1px solid var(--rule)}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:18px 34px 18px 44px;position:relative;
+  font-size:15.5px;font-weight:500;line-height:1.7;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{
+  content:"Q";position:absolute;left:0;top:19px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ai);letter-spacing:.08em;
+}
+.faq summary::after{
+  content:"＋";position:absolute;right:6px;top:18px;color:var(--ink-3);font-size:14px;
+  transition:transform .2s ease;
+}
+.faq details[open] summary::after{content:"−"}
+.faq summary:hover{color:var(--ai)}
+.faq .a{
+  padding:0 34px 22px 44px;font-size:14.5px;color:var(--ink-2);line-height:1.9;position:relative;
+}
+.faq .a::before{
+  content:"A";position:absolute;left:0;top:1px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-3);letter-spacing:.08em;
+}
+
 /* ---------- signup ---------- */
 .signup{padding:78px 0;border-bottom:1px solid var(--rule)}
 .form{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap;max-width:32em}
@@ -281,7 +307,7 @@ td b{font-weight:700}
 }
 .status-line .k{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--ink-3)}
 .status-line .v{font-size:14.5px}
-.status-line .v b{font-family:"JetBrains Mono",monospace;font-size:17px;color:var(--shu)}
+.status-line .v b{font-family:"JetBrains Mono",monospace;font-size:17px;color:var(--ai)}
 
 .warm{
   font-family:"Shippori Mincho",serif;font-size:16px;line-height:1.8;color:var(--ink);
@@ -307,6 +333,7 @@ td b{font-weight:700}
       <a href="#kensho">検証</a>
       <a href="#deguchi">出口</a>
       <a href="#kiroku">記録</a>
+      <a href="#shitsumon">質問</a>
       <a href="#hajimeru">はじめる</a>
     </nav>
   </div>
@@ -323,7 +350,7 @@ td b{font-weight:700}
       <p class="lead-in">このページも、訂正から始めます。</p>
 
       <div class="correction">
-        <span class="corr-tag">訂正記録 R-001 ／ このブランドの最初の訂正</span>
+        <span class="corr-tag">訂正 001 ／ このブランドの最初の訂正</span>
         <p><span class="struck">バブルを知っていれば、資産は必ず増える。<span class="line"></span></span></p>
         <p class="corr-note">朱書き：「必ず」は使わない。市場について、私は断定しない。</p>
         <div class="corr-arrow">
@@ -342,7 +369,7 @@ td b{font-weight:700}
       <div class="decl">
         <span class="stamp">事前公開</span>
         <p>このページは、募集ではありません。私がこれから何をするかを、<strong>実行の前に</strong>公開する宣言です。内容を変えるときは、理由とともに改訂番号を上げて公開します。
-        <span class="meta">公開日 2026-08-18 ／ 改訂 R-001</span></p>
+        <span class="meta">公開日 2026-08-18 ／ 改訂 R-002（改訂履歴は CHANGELOG に記録）</span></p>
       </div>
     </div>
   </section>
@@ -558,15 +585,58 @@ td b{font-weight:700}
     </div>
   </section>
 
+  <section class="sec rv" id="shitsumon">
+    <div class="wrap grid">
+      <div class="mark">SHITSUMON<b>よくある質問</b></div>
+      <div class="col">
+        <h2>先に、はっきりさせておきます。</h2>
+
+        <div class="faq">
+          <details>
+            <summary>これは投資助言ですか？</summary>
+            <div class="a">いいえ。私は投資助言業者ではありません。個別の銘柄について「買うべき」「売るべき」とお伝えすることはしません。公開するのは、私自身の判断と、その理由と、結果の記録です。</div>
+          </details>
+          <details>
+            <summary>「これを買えばいい」を教えてもらえますか？</summary>
+            <div class="a">教えません。それを渡すブランドではないからです。答えを渡すと、次に迷ったときにまた誰かに聞くことになります。渡すのは答えではなく、自分で判断するための型です。</div>
+          </details>
+          <details>
+            <summary>初心者ですが、ついていけますか？</summary>
+            <div class="a">私も専門家ではありません。専門用語は、初めて出てきたときに必ず説明します。まずは「稼ぐ・守る・増やす・使う・残す」のうち、いま自分に一番近い1つから読んでみてください。全部を一度に理解する必要はありません。</div>
+          </details>
+          <details>
+            <summary>有料のものは、いつから始まりますか？</summary>
+            <div class="a">1年分の記録が積み上がるまで、コミュニティや高額商品は販売しません。実績のないうちに伴走を売るのは、まだ存在しない信頼を担保にすることだと考えているからです。それまでに販売するのは、私自身が実際に使っている道具（テンプレートなど）に限ります。</div>
+          </details>
+          <details>
+            <summary>損をしたときは、どうするんですか？</summary>
+            <div class="a">利益と同じ形式で公開します。金額ではなく％で、最大下落率も一緒に出します。ルールを守って出た損失は「想定内の損失」として、仮説の検証材料に使います。都合の悪い記録を出さないことは、このブランドでは最も避けたい失敗です。</div>
+          </details>
+          <details>
+            <summary>途中でルールを変えることはありますか？</summary>
+            <div class="a">あります。4年のあいだに、制度も市場も変わるからです。ただし変えるときは必ず、変更点・理由・適用日を添えて事前に公開し、改訂番号を上げます。過去の版は削除しません。規律とは、変えないことではなく、変え方が決まっていることだと考えています。</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="signup rv" id="hajimeru">
     <div class="wrap grid">
       <div class="mark">HAJIMERU<b>はじめる</b></div>
       <div class="col">
         <h2>第1回から受け取る</h2>
         <p class="body-text">毎月1回、その月の判断・数字・ルールを守れたかどうか・失敗を、同じ形式でお届けします。<strong>創刊はこれからです。</strong>売り込みはありません。いつでも解除できます。</p>
-        <form class="form" id="signup-form">
+        <!--
+          ▼ メール配信サービスへの接続方法
+            1) data-endpoint に配信サービスのフォーム送信先URLを入れる
+               （例：Mailchimp / ConvertKit / Brevo などのフォームPOST先）
+            2) name 属性が配信サービス側の項目名と一致しているか確認する
+            3) endpoint が空のあいだは、送信しても登録されず案内だけが出ます
+        -->
+        <form class="form" id="signup-form" data-endpoint="" method="post">
           <label for="email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">メールアドレス</label>
-          <input id="email" type="email" required placeholder="メールアドレス" autocomplete="email">
+          <input id="email" name="email" type="email" required placeholder="メールアドレス" autocomplete="email">
           <button class="btn btn-solid" type="submit">登録する</button>
         </form>
         <p class="status" id="signup-status" role="status" aria-live="polite"></p>
@@ -590,7 +660,7 @@ td b{font-weight:700}
         <div class="decl" style="margin-top:26px">
           <span class="stamp">事前公開</span>
           <p>この宣言は 2026-08-18 に公開しました。変更する場合は、変更点・理由・適用日を添えて公開し、改訂番号を上げます。過去の版は削除しません。
-          <span class="meta">改訂 R-001</span></p>
+          <span class="meta">改訂 R-002</span></p>
         </div>
         <p style="margin-top:26px">人として、どう判断したか。</p>
       </div>
@@ -618,7 +688,24 @@ td b{font-weight:700}
   var status = document.getElementById("signup-status");
   form.addEventListener("submit", function(ev){
     ev.preventDefault();
-    status.textContent = "このページは公開前のデザイン案です。配信サービスに接続すると、この登録が有効になります。";
+    var endpoint = (form.getAttribute("data-endpoint") || "").trim();
+    if(!endpoint){
+      status.textContent = "このページはまだ配信サービスに接続していません。接続後、この登録が有効になります。";
+      return;
+    }
+    var btn = form.querySelector("button");
+    btn.disabled = true;
+    status.textContent = "送信しています…";
+    fetch(endpoint, {method:"POST", body:new FormData(form)})
+      .then(function(res){
+        if(!res.ok){ throw new Error(res.status); }
+        form.reset();
+        status.textContent = "登録しました。第1回の公開時にお届けします。";
+      })
+      .catch(function(){
+        status.textContent = "送信できませんでした。時間をおいて、もう一度お試しください。";
+      })
+      .finally(function(){ btn.disabled = false; });
   });
 })();
 </script>
