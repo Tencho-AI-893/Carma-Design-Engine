@@ -35,7 +35,7 @@
 | 03 | [verification-protocol.md](./03_verification-protocol.md) | 「予想」ではなく「検証」を成立させる運用規約 | 変更時に必ずログ |
 | 04 | [compliance-guide.md](./04_compliance-guide.md) | 法令に配慮した表現ガイド・免責文の型 | 制度変更時 |
 | 05 | [content-architecture.md](./05_content-architecture.md) | コンテンツ設計・無料/有料の線引き・展開フロー | 四半期ごと |
-| 06 | [projects/](./projects/) | 各プロジェクトの設計書（`.md`＝編集用／`.html`＝公開用） | プロジェクト単位 |
+| 06 | [projects/](./projects/) | 各プロジェクトの設計書（`.md`＝編集用／`.html`＝公開用）／`trend-watchlist.md`＝対象未確定のメモ | プロジェクト単位 |
 | 07 | [monetization.md](./07_monetization.md) | 収益設計（「仕組みを売る」の具体化） | 半年ごと |
 | 08 | [operating-rhythm.md](./08_operating-rhythm.md) | 月次・四半期・年次の運用リズム | 半年ごと |
 | 09 | [kpi.md](./09_kpi.md) | ブランド資産を測る指標設計 | 四半期ごと |
@@ -44,7 +44,7 @@
 | — | [content/](./content/) | 実際のコンテンツ原稿 | 随時 |
 | — | [lp/](./lp/) | 公開用ランディングページと設計ノート | 改訂時 |
 | — | [CHANGELOG.md](./CHANGELOG.md) | ブランドOSの改訂履歴 | 変更のたび |
-| — | [templates/](./templates/) | 月次レポート・判断ログ・失敗ログ等の雛形 | 随時 |
+| — | [templates/](./templates/) | 月次レポート・判断ログ・失敗ログ・プロジェクト設計等の雛形 | 随時 |
 
 ---
 
