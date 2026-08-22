@@ -185,7 +185,7 @@ footer{border-top:1px solid var(--rule);padding:44px 0 70px;margin-top:20px}
     <h1>Project 01<br>BTCサイクル積立プロジェクト</h1>
     <p class="sub">ブランド「金融リテラシー＝人として」の第1ケーススタディ。この文書は、検証プロトコル原則1（事前公開）に基づき、<strong>実行の前に</strong>公開するものです。</p>
     <div class="stamps">
-      <span>ステータス <b>稼働前（記入中）</b></span>
+      <span>ステータス <b>稼働前（記入済・未公開）</b></span>
       <span>起草 <b>2026-08-18</b></span>
       <span>公開 <b>——</b></span>
       <span>改訂 <b>R-000</b></span>
@@ -195,7 +195,7 @@ footer{border-top:1px solid var(--rule);padding:44px 0 70px;margin-top:20px}
       <span class="badge">未完成</span>
       <div>
         <h2>このルールは、まだ実行できません</h2>
-        <p>本文中に <span class="blank">未記入</span> が <span class="count" id="blank-count">—</span> 箇所あります。<strong>1つでも空欄が残っているあいだは、積立を開始しません。</strong>これは意志ではなく手順として固定しています。特に <b>仮説の反証条件</b> と <b>利確ルール</b> は、埋まらないまま始めると、この検証は「知っているだけの人の記録」になります。</p>
+        <p>本文中に <span class="blank sample">未記入</span> が <span class="count" id="blank-count">—</span> 箇所あります。<strong>1つでも空欄が残っているあいだは、積立を開始しません。</strong>これは意志ではなく手順として固定しています。特に <b>仮説の反証条件</b> と <b>利確ルール</b> は、埋まらないまま始めると、この検証は「知っているだけの人の記録」になります。</p>
       </div>
     </div>
   </header>
@@ -281,11 +281,11 @@ footer{border-top:1px solid var(--rule);padding:44px 0 70px;margin-top:20px}
 
         <h3>4-2. 積立ルール</h3>
         <div class="tw"><table><tbody>
-          <tr><td class="k">対象</td><td><span class="blank">未記入</span>（現物BTC／BTC関連株／投信 等）</td></tr>
-          <tr><td class="k">口座</td><td><span class="blank">未記入</span>（新NISA成長投資枠／つみたて枠／特定口座の使い分け）</td></tr>
-          <tr><td class="k">金額・頻度</td><td>毎月<span class="blank">未記入</span>日に<span class="blank">未記入</span>円</td></tr>
-          <tr><td class="k">相場が下落したときの行動</td><td><span class="blank">未記入</span>（増額する／変えない）</td></tr>
-          <tr><td class="k">相場が急騰したときの行動</td><td><span class="blank">未記入</span>（変えない／減額する）</td></tr>
+          <tr><td class="k">対象</td><td>BTC関連株（MSTR・メタプラネット等）</td></tr>
+          <tr><td class="k">口座</td><td>新NISA成長投資枠を優先。枠が埋まったら特定口座に切り替える</td></tr>
+          <tr><td class="k">金額・頻度</td><td>毎月7日に18万円</td></tr>
+          <tr><td class="k">相場が下落したときの行動</td><td>変えない（増額も減額もしない）</td></tr>
+          <tr><td class="k">相場が急騰したときの行動</td><td>変えない</td></tr>
         </tbody></table></div>
 
         <h3>4-3. 利確ルール ★このプロジェクト最大の急所</h3>
@@ -295,22 +295,22 @@ footer{border-top:1px solid var(--rule);padding:44px 0 70px;margin-top:20px}
           <strong>不変層の原則：出口を決めずに入らない。</strong>
         </div>
         <div class="tw"><table><tbody>
-          <tr><td class="k">判定タイミング</td><td><span class="blank">未記入</span>（月1回／週1回など、頻度を固定する）</td></tr>
-          <tr><td class="k">利確条件</td><td><span class="blank">未記入</span>（価格水準／評価益率／サイクル経過月数など、数値で定義）</td></tr>
-          <tr><td class="k">1回あたりの利確比率</td><td>保有の<span class="blank">未記入</span>％</td></tr>
-          <tr><td class="k">利確資金の行き先</td><td><span class="blank">未記入</span>（生活防衛資金／現金化／他資産）</td></tr>
+          <tr><td class="k">判定タイミング</td><td>毎月1回、積立日（7日）にのみ判定する（それ以外の日は判断しない）</td></tr>
+          <tr><td class="k">利確条件</td><td>次回供給イベント（半減期）から12ヶ月経過以降、評価益率が+150％を超えた月に発動する</td></tr>
+          <tr><td class="k">1回あたりの利確比率</td><td>保有の10〜30％の範囲でAIが試算・提示し、人間が最終承認して実行する（比率の範囲を事前固定し、判断の恣意性を抑える）</td></tr>
+          <tr><td class="k">利確資金の行き先</td><td>一部は生活防衛資金の外側で現金化。残りは将来のトレンド投資（半導体・AI関連等）の軍資金として確保する</td></tr>
         </tbody></table></div>
 
         <h3>4-4. リスク管理ルール</h3>
         <div class="tw"><table><tbody>
-          <tr><td class="k">最大許容ドローダウン</td><td>−<span class="blank">未記入</span>％（超えたときの行動も事前に決める）</td></tr>
-          <tr><td class="k">停止条件（中断の基準）</td><td><span class="blank">未記入</span>（収入減／制度変更／仮説の反証 など）</td></tr>
-          <tr><td class="k">例外条項</td><td><span class="blank">未記入</span>（例外を認める条件と、その記録方法）</td></tr>
+          <tr><td class="k">最大許容ドローダウン</td><td>−70％。超えても売らないが、積立額を半分にして記録を残す</td></tr>
+          <tr><td class="k">停止条件（中断の基準）</td><td>反証条件（仮説H-001）に該当した場合</td></tr>
+          <tr><td class="k">例外条項</td><td>例外を認めるのは制度変更時のみ。実行前に理由を公開する</td></tr>
         </tbody></table></div>
 
         <h3>4-5. 税・制度</h3>
         <div class="tw"><table><tbody>
-          <tr><td class="k">想定される課税区分</td><td><span class="blank">未記入</span>（※税務は必ず専門家に確認する）</td></tr>
+          <tr><td class="k">想定される課税区分</td><td>新NISA成長投資枠内は非課税。特定口座移行後は譲渡益に約20.315％課税（※実際の税務は必ず専門家に確認する）</td></tr>
           <tr><td class="k">制度変更時の対応</td><td>一次情報で確認し、対応を記事化。過去記事は削除せず注記を追加する</td></tr>
         </tbody></table></div>
 
@@ -451,7 +451,7 @@ footer{border-top:1px solid var(--rule);padding:44px 0 70px;margin-top:20px}
 
 <script>
 (function(){
-  var n = document.querySelectorAll(".blank").length;
+  var n = document.querySelectorAll(".blank:not(.sample)").length;
   var el = document.getElementById("blank-count");
   el.textContent = n + " 箇所";
   if(n === 0){
