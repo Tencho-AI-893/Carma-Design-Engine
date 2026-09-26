@@ -1,0 +1,19 @@
+{
+  "name": "smcarma-member-import",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SM.Carma 会員データ名寄せ・visit_history拡張の安全装置付き取り込みモジュール。既存のSMCarmaServer(Node.js/Express)から差し込んで使う独立モジュール。",
+  "main": "src/pipeline.js",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "dev": "node src/app.js",
+    "restore": "node bin/restore.js",
+    "restore:list": "node bin/restore.js --list"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

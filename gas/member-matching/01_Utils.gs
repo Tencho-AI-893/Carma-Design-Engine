@@ -30,14 +30,61 @@ function MM_findOrCreateColumn_(sheet, headerName) {
   return newCol;
 }
 
+// 全角数字（０-９）を半角数字に変換する
+function MM_toHalfWidthDigits_(str) {
+  return str.replace(/[０-９]/g, function (ch) {
+    return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
+  });
+}
+
+// 電話番号の正規化。以下をすべて同一番号として扱う:
+//   "090-1234-5678" / "09012345678" / "090 1234 5678" / 全角数字 / 前後スペース
+// ハイフン・スペース・カッコ等は除去し、数字だけを比較キーにする。
 function MM_normalizePhone_(value) {
   if (value === null || value === undefined) return '';
-  return String(value).replace(/[^0-9]/g, '');
+  var s = String(value).trim();
+  s = MM_toHalfWidthDigits_(s);
+  return s.replace(/[^0-9]/g, '');
 }
 
 function MM_normalizeName_(value) {
   if (value === null || value === undefined) return '';
-  return String(value).replace(/\s+/g, '').trim();
+  var s = String(value).trim();
+  s = MM_toHalfWidthDigits_(s);
+  return s.replace(/\s+/g, '');
+}
+
+// 見出し行を1回読み取り、[{name, col}] の配列で返す（空欄見出しは除外）
+function MM_getHeaderList_(sheet) {
+  var lastCol = sheet.getLastColumn();
+  if (lastCol === 0) return [];
+  var headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+  var list = [];
+  for (var i = 0; i < headers.length; i++) {
+    var h = String(headers[i]).trim();
+    if (h) list.push({ name: h, col: i + 1 });
+  }
+  return list;
+}
+
+// 同じ見出し名が複数列に存在しないかチェックする。重複があれば説明文の配列を返す。
+function MM_findDuplicateHeaders_(sheet, sheetLabel) {
+  var headers = MM_getHeaderList_(sheet);
+  var byName = {};
+  headers.forEach(function (h) {
+    if (!byName[h.name]) byName[h.name] = [];
+    byName[h.name].push(h.col);
+  });
+  var problems = [];
+  Object.keys(byName).forEach(function (name) {
+    if (byName[name].length > 1) {
+      problems.push(
+        sheetLabel + 'に列名「' + name + '」が' + byName[name].length + '列重複しています（列: ' +
+          byName[name].map(MM_columnToLetter_).join(', ') + '）'
+      );
+    }
+  });
+  return problems;
 }
 
 // 既存会員マスタのシートを取得。設定名で見つからなければ自動検出する。
